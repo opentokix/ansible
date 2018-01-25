@@ -1,0 +1,4 @@
+---
+syslog_host: 127.0.0.1
+syslog_port: 514
+rsyslog_template: elk.conf.j2 

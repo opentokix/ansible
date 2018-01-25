@@ -1,0 +1,12 @@
+---
+- name: configure 
+  template: 
+    src: "{{ rsyslog_template }}"
+    dest: /etc/rsyslog.d/99-elk.conf
+  become: yes
+  notify: 
+    - reload rsyslog
+  tags:
+    - configuration
+    - installation
+
