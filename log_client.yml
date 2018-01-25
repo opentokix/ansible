@@ -1,0 +1,7 @@
+---
+- hosts: all
+  vars:
+    syslog_host: logger.l.opentokix.com
+    syslog_port: 5140
+  roles:
+    - rsyslog

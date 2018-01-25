@@ -1,0 +1,13 @@
+---
+deb_source_file: carbonapi_0.8.0_amd64.deb
+carbonapi_conf_template: carbonapi.yaml.j2
+carbonapi_host: localhost
+carbonapi_port: 8081
+memcache_server: 127.0.0.1
+memcache_port: 11211
+graphite_host: localhost
+graphite_port: 2003
+graphite_prefix: carbon.api
+carbonapi_backend_host: 127.0.0.1
+carbonapi_backend_port: 8080
+

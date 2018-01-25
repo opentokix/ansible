@@ -1,0 +1,49 @@
+---
+- name: Upload debfile
+  copy:
+    src: "{{ deb_source_file }}"
+    dest: /tmp/carbonapi.deb
+  become: true
+
+- name: install debfile
+  apt:
+    deb: /tmp/carbonapi.deb
+  become: true
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+
+- name: install memcached
+  apt:
+    name: memcached
+    state: present
+  become: true
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+
+- name: create defaults file
+  copy:
+    src: carbonapi
+    dest: /etc/default/carbonapi
+  become: true
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+
+- name: create config folder
+  file:
+    path: /etc/carbonapi
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  become: true
+
+- name: create config file
+  template:
+    src: "{{ carbonapi_conf_template }}"
+    dest: /etc/carbonapi/carbonapi.yaml
+  become: true
+  notify: restart carbonapi
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+
+- name: cleanup
+  file:
+    path: /tmp/carbonapi.deb
+    state: absent
+  become: true
