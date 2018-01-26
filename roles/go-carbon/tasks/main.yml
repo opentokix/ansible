@@ -1,0 +1,47 @@
+---
+- name: Copy debfile 
+  copy: 
+    src: {{ deb_source_file }}
+    dest: /tmp/go-carbon.deb 
+  become: true
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu") 
+
+  - name: install go-carbon
+  apt: 
+    deb: /tmp/gocarbon.deb
+  become: true 
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu") 
+
+- name: Create metrics directory 
+  file: 
+    path: "{{ carbon_data_dir }}"
+    state: directory
+    owner: "{{ carbon_user }}"
+    mode: 0755
+  become: true 
+- name: Create graphite directory
+  file: 
+    path: /srv/metrics/graphite
+    state: directory
+    mode: 0755
+    owner: "{{ carbon_user }}"
+    group: "{{ carbon_user }}"
+  become: true
+- name: carbon conf 
+  template: 
+    src: go-carbon.conf.j2
+    dest: /etc/go-carbon.conf 
+  notify: restart go-carbon
+  become: true 
+- name: carbon schemas 
+  template: 
+    src: storage-schemas.conf.j2
+    dest: /etc/go-carbon/storage-schemas.conf
+  notify: restart go-carbon
+  become: true
+- name: carbon aggregation 
+  template: 
+    src: storage-aggregation.conf.j2
+    dest: /etc/go-carbon/storage-aggregation.conf
+  notify: restart go-carbon
+  become: true
