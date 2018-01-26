@@ -1,10 +1,11 @@
 ---
 - name: copy grafana deb 
+  copy:
     src: "{{ deb_file_name }}"
     dest: /tmp/grafana.deb
   become: true
   when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu") 
-- nam: install grafana
+- name: install grafana
   apt:
     deb: /tmp/grafana.deb
   become: true
