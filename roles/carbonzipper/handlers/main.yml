@@ -1,0 +1,6 @@
+---
+- name: restart carbonzipper
+  service:
+    name: carbonzipper
+    state: restarted
+  become: true

@@ -1,0 +1,23 @@
+---
+- name: copy carbonzipper
+  copy:
+    src: "{{ deb_src_file }}"
+    dest: /tmp/carbonzipper.deb
+  become: true
+
+- name: install debfiles
+  apt:
+    deb: "{{ item }}"
+  with_items:
+    - /tmp/carbonzipper.deb
+  become: true
+  notify: restart carbonzipper
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+
+- name: cleanup
+  file:
+    path: {{ item }}
+    state: absent
+  become: true
+  with_items:
+    - /tmp/carbonzipper.deb

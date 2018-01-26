@@ -1,0 +1,7 @@
+---
+- name: start go-carbon
+  service:
+    name: go-carbon
+    state: reetarted
+    enabled: true
+  become: true

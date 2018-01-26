@@ -1,6 +1,5 @@
 ---
 deb_source_file: carbonapi_0.8.0_amd64.deb
-carbonzipper_deb: carbonzipper_0.72_amd64.deb
 carbonapi_conf_template: carbonapi.yaml.j2
 carbonapi_host: localhost
 carbonapi_port: 8081

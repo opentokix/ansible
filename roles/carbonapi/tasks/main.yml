@@ -5,20 +5,14 @@
     dest: /tmp/carbonapi.deb
   become: true
 
-- name: copy carbonzipper
-  copy:
-    src: "{{ carbonzipper_deb }}"
-    dest: /tmp/carbonzipper.deb
-  become: true
 
 - name: install debfiles
   apt:
     deb: "{{ item }}"
-  with_items: 
+  with_items:
     - /tmp/carbonapi.deb
-    - /tmp/carbonzipper.deb
   become: true
-  notify: restart carbonzipper
+
   when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
 
 - name: install memcached
@@ -59,4 +53,3 @@
   become: true
   with_items:
     - /tmp/carbonapi.deb
-    - /tmp/carbonzipper.deb

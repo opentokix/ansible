@@ -1,0 +1,11 @@
+---
+deb_source_file: go-carbon_0.12.0-rc1_amd64.deb
+carbon_data_dir: /srv/metrics/graphite/whisper
+carbon_udp_port: 2003
+carbon_udp_enabled: true
+carbon_tcp_port: 2003
+carbon_tcp_enabled: true
+carbon_pickle_port: 2004
+carbon_pickle_enabled: true
+
+
