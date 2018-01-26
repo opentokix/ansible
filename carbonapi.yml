@@ -1,6 +1,0 @@
----
-- name: install carbonapi
-  hosts: all
-  roles: 
-    - carbonapi
-    - go-carbon
