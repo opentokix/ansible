@@ -11,13 +11,13 @@ metric-interval = "1m0s"
 max-cpu = 4
 
 [whisper]
-data-dir = "{{ carbon_data_dir }}"
+data-dir = "{{ carbon_data_dir }}/whisper"
 # http://graphite.readthedocs.org/en/latest/config-carbon.html#storage-schemas-conf. Required
 schemas-file = "/etc/go-carbon/storage-schemas.conf"
 # http://graphite.readthedocs.org/en/latest/config-carbon.html#storage-aggregation-conf. Optional
 aggregation-file = "/etc/go-carbon/storage-aggregation.conf"
 # Worker threads count. Metrics sharded by "crc32(metricName) % workers"
-workers = 8
+workers = tags
 # Limits the number of whisper update_many() calls per second. 0 - no limit
 max-updates-per-second = 0
 # Sparse file creation
@@ -143,7 +143,7 @@ enabled = {{ grpc_enabled }}
 [tags]
 enabled = {{  graphite_tags_enabled }}
 # TagDB url. It should support /tags/tagMultiSeries endpoint
-tagdb-url = "http://{{ tagsdb_host }}:{{ tagsds_port }}"
+tagdb-url = "http://{{ tagsdb_host }}:{{ tagsdb_port }}"
 tagdb-chunk-size = {{ tagsdb_chunk_size }}
 # Directory for send queue (based on leveldb)
 local-dir = "{{ tagsdb_dir }}"

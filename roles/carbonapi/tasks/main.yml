@@ -48,7 +48,7 @@
 
 - name: cleanup
   file:
-    path: {{ item }}
+    path: "{{ item }}"
     state: absent
   become: true
   with_items:

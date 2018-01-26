@@ -15,8 +15,8 @@ grpc_host: 127.0.0.1
 grpc_port: 7003 
 grpc_enabled: true 
 graphite_tags_enabled: false
-tagsgb_host: 127.0.0.1
-tagsgb_port: 8000 
+tagsdb_host: 127.0.0.1
+tagsdb_port: 8000 
 tagsdb_chunk_size: 32
 tagsdb_dir: /var/lib/graphite/tagging/
 tagsdb_timeout: 1s

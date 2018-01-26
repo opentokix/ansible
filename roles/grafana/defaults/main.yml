@@ -1,0 +1,5 @@
+---
+deb_file_name: grafana_4.6.3_amd64.deb
+grafana_admin_user: admin
+grafana_admin_password: admin
+grafana_secret_key: sm0G3e6xjly8kQAjgeqeV
