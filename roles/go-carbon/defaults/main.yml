@@ -7,5 +7,34 @@ carbon_tcp_port: 2003
 carbon_tcp_enabled: true
 carbon_pickle_port: 2004
 carbon_pickle_enabled: true
-
-
+carbonlink_host: 127.0.0.1
+carbonlink_port: 7002 
+carbonlink_enabled: true
+grpc_host: 127.0.0.1
+grpc_port: 7003 
+grpc_enabled: true 
+graphite_tags_enabled: false
+tagsgb_host: 127.0.0.1
+tagsgb_port: 8000 
+tagsdb_chunk_size: 32
+tagsdb_dir: /var/lib/graphite/tagging/
+tagsdb_timeout: 1s
+carbonserver_enabled: true 
+carbonserver_host: 127.0.0.1
+carbonserver_port: 8080
+carbon_dump_enabled: true 
+carbon_dump_dir: /var/lib/graphite/dump/
+aggregation_xfilesfactor: 0.5
+aggregation_method: average 
+schema_default_pattern: .*
+schema_default_retentions: 10s:30d,30s:90d,5m:1y,1h:5y
+retention_groups: 
+  default: 
+    pattern: .*
+    retention: 10s:30d
+  servers:
+    pattern: server.*
+    retention: 10s:30d,1m:90d,10m:900d
+  carbon:
+    pattern: carbon.*
+    retention: 1m:365d

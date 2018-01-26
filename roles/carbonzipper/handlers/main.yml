@@ -3,4 +3,5 @@
   service:
     name: carbonzipper
     state: restarted
+    enabled: true
   become: true

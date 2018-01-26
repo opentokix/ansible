@@ -1,5 +1,4 @@
-# Documentation:
-# http://graphite.readthedocs.io/en/latest/config-carbon.html#storage-schemas-conf
+# This is an ini-file 
 {% for key,value in retention_groups.items() %}
 [{{ key }}]
 pattern = {{ value['pattern'] }}

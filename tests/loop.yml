@@ -1,0 +1,23 @@
+---
+- name: create looped inifile 
+  hosts: all
+  vars:
+      retention_groups: 
+        default: 
+          pattern: .*
+          retention: 10s:30d
+        servers:
+          pattern: server.*
+          retention: 10s:30d,1m:90d,10m:900d
+        carbon:
+          pattern: carbon.*
+          retention: 1m:365d
+  tasks:
+    - name: debug variable
+      debug: msg="{{ retention_groups.items() }}"
+    - name: create ini file 
+      template: 
+        src: templates/loop.ini.j2
+        dest: /tmp/loop.ini 
+
+            

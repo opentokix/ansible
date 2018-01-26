@@ -1,4 +1,4 @@
-[common]
+2[common]
 # Run as user. Works only in daemon mode
 user = "carbon"
 # Prefix for store all internal go-carbon graphs. Supported macroses: {host}
@@ -127,8 +127,8 @@ buffer-size = 0
 # initial-offset = "-30m"
 
 [carbonlink]
-listen = "127.0.0.1:7002"
-enabled = true
+listen = "{{ carbonlink_host }}:{{ carbonlink_port }}"
+enabled = {{ carbonlink_enabled }}
 # Close inactive connections after "read-timeout"
 read-timeout = "30s"
 
@@ -136,27 +136,27 @@ read-timeout = "30s"
 # protocol: https://github.com/lomik/go-carbon/blob/master/helper/carbonpb/carbon.proto
 # samples: https://github.com/lomik/go-carbon/tree/master/api/sample
 [grpc]
-listen = "127.0.0.1:7003"
-enabled = true
+listen = "1{{ grpc_host }}:{{grpc_port}}"
+enabled = {{ grpc_enabled }}
 
 # http://graphite.readthedocs.io/en/latest/tags.html
 [tags]
-enabled = false
+enabled = {{  graphite_tags_enabled }}
 # TagDB url. It should support /tags/tagMultiSeries endpoint
-tagdb-url = "http://127.0.0.1:8000"
-tagdb-chunk-size = 32
+tagdb-url = "http://{{ tagsdb_host }}:{{ tagsds_port }}"
+tagdb-chunk-size = {{ tagsdb_chunk_size }}
 # Directory for send queue (based on leveldb)
-local-dir = "/var/lib/graphite/tagging/"
+local-dir = "{{ tagsdb_dir }}"
 # POST timeout
-tagdb-timeout = "1s"
+tagdb-timeout = "{{ tagsdb_timeout }}"
 
 [carbonserver]
 # Please NOTE: carbonserver is not intended to fully replace graphite-web
 # It acts as a "REMOTE_STORAGE" for graphite-web or carbonzipper/carbonapi
-listen = "127.0.0.1:8080"
+listen = "{{ carbonserver_host }}:{{ carbonserver_port }}"
 # Carbonserver support is still experimental and may contain bugs
 # Or be incompatible with github.com/grobian/carbonserver
-enabled = true
+enabled = {{ carbonserver_enabled }}
 # Buckets to track response times
 buckets = 10
 # carbonserver-specific metrics will be sent as counters
@@ -202,9 +202,9 @@ stats-percentiles = [99, 98, 95, 75, 50]
 
 [dump]
 # Enable dump/restore function on USR2 signal
-enabled = false
+enabled = {{ carbon_dump_enabled }}
 # Directory for store dump data. Should be writeable for carbon
-path = "/var/lib/graphite/dump/"
+path = "{{ carbon_dump_dir }}"
 # Restore speed. 0 - unlimited
 restore-per-second = 0
 
