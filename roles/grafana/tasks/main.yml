@@ -1,17 +1,17 @@
 ---
-- name: copy grafana deb 
+- name: copy grafana deb
   copy:
     src: "{{ deb_file_name }}"
     dest: /tmp/grafana.deb
   become: true
-  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu") 
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
 - name: install grafana
   apt:
     deb: /tmp/grafana.deb
   become: true
-  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu") 
-- name: grafana config 
-  temp2late:
+  when: (ansible_distribution == "Debian" or ansible_distribution == "Ubuntu")
+- name: grafana config
+  template:
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
   notify: restart grafana
@@ -20,5 +20,5 @@
   file:
     path: /tmp/grafana.deb
     state: absent
-  become: true 
-  
+  become: true
+
